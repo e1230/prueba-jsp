@@ -23,39 +23,48 @@ Versión: 9.4.1208
  */
 public class Conexion {
 
-    private Connection conectar;
-    private String BD;
-    private String usuario;
-    private String contra;
+    private Conexion() {
 
-    public Conexion(Connection conectar, String BD, String usuario, String contra) {
-        this.conectar = conectar;
-        this.BD = BD;
-        this.usuario = usuario;
-        this.contra = contra;
     }
+    //Crear connection para conexion a la base de datos//
+    private static Connection conexion = null;
+    //Singleton//
+    private static Conexion instancia;
 
-    public Conexion() {
-        this.conectar = null;
-        this.BD = "\\\"jdbc:postgresql://ec2-54-211-77-\n"
-                + "238.compute-1.amazonaws.com:5432/(d463ke2mhm8np0)?sslmode=require\\";
-        this.usuario = "kmexxmxwgkmyii";
-        this.contra = "4432729b89254410e668fae7e926738dbddd3db0b590e86d05bfdbf34b89dffe";
-    }
+    private String BD = "d463ke2mhm8np0";
+    private String usuario = "kmexxmxwgkmyii";
+    private String contra = "4432729b89254410e668fae7e926738dbddd3db0b590e86d05bfdbf34b89dffe";
+    private String host = "ec2-54-82-205-3.compute-1.amazonaws.com";
 
-    public void conectar() {
+    public Connection conectar() {
         try {
             Class.forName("org.postgresql.Driver");
-            this.BD = "";
-            this.usuario = "";
-            this.contra = "";
-            this.conectar = (Connection) DriverManager.getConnection(BD, usuario, contra);
+            conexion = (Connection) DriverManager.getConnection(BD, usuario, contra);
+            System.out.println("Conexion exitosa");
         } catch (ClassNotFoundException | HeadlessException | SQLException e) {
-            System.out.println("Error a conectar: " + e);
+            System.out.println("Error a conectar a la BD: " + e);
+        }
+        return conexion;
+    }
+    //Metodo para cerrar la conexión//
+
+    public void cerrarConexion() throws SQLException {
+        try {
+            conexion.close();
+            System.out.println("Se desconecto de la BD");
+        } catch (Exception e) {
+            System.out.println("Error a cerra conexion: " + e);
+            conexion.close();
+        } finally {
+            conexion.close();
         }
     }
 
-    public Connection getConexion() {
-        return conectar;
+    //Patron Singleton//
+    public static Conexion getInstance() {
+        if (instancia == null) {
+            instancia = new Conexion();
+        }
+        return instancia;
     }
 }
