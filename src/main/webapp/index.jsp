@@ -58,7 +58,7 @@
             </div>
             <div class="btn btn-info text-white w-100 mt-2 fw-semibold shadow-sm">Login</div>
             <div class="d-flex gap-1 justify-content-center mt-1">
-                <div>No tienes cuenta?</div>
+                <div>¿No tienes cuenta?</div>
                 <a class="text-decoration-none text-info fw-semibold" href="registro.jsp">Registrese</a>
             </div>
             <div class="p-3">
