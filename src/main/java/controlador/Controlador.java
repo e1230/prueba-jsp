@@ -4,7 +4,7 @@
  */
 package controlador;
 
-import com.sun.java.swing.plaf.windows.resources.windows;
+//import com.sun.java.swing.plaf.windows.resources.windows;
 import static java.awt.SystemColor.window;
 import java.io.IOException;
 import java.io.PrintWriter;

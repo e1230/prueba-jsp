@@ -10,9 +10,9 @@ import java.sql.*;
  * @author is-da
  */
 public class ConexionPrueba {
-    String BD = "jdbc:postgresql://localhost:5432/prueba";
+    String BD = "jdbc:postgresql://localhost:5432/Prueba";
     String usuario = "postgres";
-    String clave = "admin";
+    String clave = "850518";
     
   public void Conection(){
       try{
