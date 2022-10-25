@@ -19,7 +19,7 @@ import java.sql.*;
 Group ID: org.postgresql
 Artifact ID: postgresql
 Versión: 9.4.1208
-
+https://www.geeksforgeeks.org/jdbc-using-model-object-and-singleton-class/
  */
 public class Conexion {
 
@@ -31,17 +31,16 @@ public class Conexion {
     //Singleton//
     private static Conexion instancia;
 
-    private String BD = "d463ke2mhm8np0";
-    private String usuario = "kmexxmxwgkmyii";
-    private String contra = "4432729b89254410e668fae7e926738dbddd3db0b590e86d05bfdbf34b89dffe";
-    private String host = "ec2-54-82-205-3.compute-1.amazonaws.com";
+    private String BD = "jdbc:postgresql://localhost:5432/prueba";
+    private String usuario = "postgres";
+    private String contra = "admin";
+    private String host = "ec2-54-82-205-3.compute-1.amazonaws.com"; //Heroku
 
     public Connection conectar() {
         try {
-            Class.forName("org.postgresql.Driver");
             conexion = (Connection) DriverManager.getConnection(BD, usuario, contra);
-            System.out.println("Conexion exitosa");
-        } catch (ClassNotFoundException | HeadlessException | SQLException e) {
+            System.out.println("Conexion exitosa Empezamos con la base de datos");
+        } catch (Exception e) {
             System.out.println("Error a conectar a la BD: " + e);
         }
         return conexion;

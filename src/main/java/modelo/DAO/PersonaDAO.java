@@ -11,41 +11,57 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.DTO.PersonaDTO;
+import java.sql.*;
 
 /**
  *
  * @author is-da
  */
 public class PersonaDAO {
-   private static final String SQL_READALL ="SELECT * FROM tb_persona";
-   private static final Conexion con = Conexion.getInstance();
 
-    public PersonaDAO() {
-        con.conectar();
-    }
-   
-   
-    public List<PersonaDTO> readAll(){
-        List<PersonaDTO> lista = null;
-        PreparedStatement ps;
-       
-        try{
-             ps = con.conectar().prepareStatement(SQL_READALL);
-             ResultSet rs = ps.executeQuery();
-             lista = new ArrayList<>();
-             while(rs.next()){
-                 PersonaDTO objeto = new PersonaDTO(
-                         rs.getString("nombres"),
-                         rs.getString("telefono"),
-                         rs.getString(""),
-                         rs.getString(""));
-             }
+    //Conexion a la base de datos con Singleton//
+    private static final Conexion con = Conexion.getInstance();
+    
+    private PreparedStatement ps;
+    private ResultSet rs;
+    private int r;
+    private String sql;
+    
+    public PersonaDTO validar(String correo, String clave) {
+        PersonaDTO objpersona = new PersonaDTO();
+        sql = "SELECT * FROM persona WHERE correo=? AND clave=?";
+        try {
+            Connection conexion = con.conectar();
+            ps = conexion.prepareStatement(sql);
+            ps.setString(1, correo);
+            ps.setString(2, clave);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                objpersona.setId(rs.getInt("id"));
+                objpersona.setNombre(rs.getString("nombre"));
+                objpersona.setCorreo(rs.getString("correo"));
+                objpersona.setTelefono(rs.getString("telefono"));
+                objpersona.setClave(rs.getString("clave"));
+            }
             
-        }catch(SQLException ex){
-            
+        } catch (Exception e) {
+            System.out.println("Error a validar usuario: "+e);
         }
         
-       return lista;
-        
+        return objpersona;
     }
+//    public List<PersonaDTO> readAll(){
+//        List<PersonaDTO> lista = null;
+//        PreparedStatement ps;
+//       
+//        try{
+//        
+//            
+//        }catch(Exception e){
+//            
+//        }
+//        
+//       return lista;
+//        
+//    }
 }
