@@ -7,6 +7,7 @@ package modelo.DAO;
 import config.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class PersonaDAO {
 
     //Conexion a la base de datos con Singleton//
     private static final Conexion con = Conexion.getInstance();
-    
+    Connection conexion; 
     private PreparedStatement ps;
     private ResultSet rs;
     private int r;
@@ -31,7 +32,7 @@ public class PersonaDAO {
         PersonaDTO objpersona = new PersonaDTO();
         sql = "SELECT * FROM persona WHERE correo=? AND clave=?";
         try {
-            Connection conexion = con.conectar();
+            conexion = con.conectar();
             ps = conexion.prepareStatement(sql);
             ps.setString(1, correo);
             ps.setString(2, clave);
