@@ -13,6 +13,7 @@ import java.util.Objects;
  */
 public class PersonaDTO implements Serializable {
 
+    int id;
     String nombre;
     String correo;
     String telefono;
@@ -21,11 +22,19 @@ public class PersonaDTO implements Serializable {
     public PersonaDTO() {
     }
 
-    public PersonaDTO(String clave, String nombre, String correo, String telefono) {
-        this.clave = clave;
+    public PersonaDTO(int id, String nombre, String correo, String telefono, String clave) {
+        this.id = id;
         this.nombre = nombre;
         this.correo = correo;
         this.telefono = telefono;
+        this.clave = clave;
+    }
+
+  
+
+    public PersonaDTO(String correo, String clave) {
+        this.correo = correo;
+        this.clave = clave;
     }
 
     public String getClave() {
@@ -60,6 +69,14 @@ public class PersonaDTO implements Serializable {
         this.telefono = telefono;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -92,6 +109,11 @@ public class PersonaDTO implements Serializable {
             return false;
         }
         return Objects.equals(this.telefono, other.telefono);
+    }
+
+    @Override
+    public String toString() {
+        return "PersonaDTO{" + "id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", telefono=" + telefono + ", clave=" + clave + '}';
     }
 
 }

@@ -19,7 +19,8 @@
         <title>JSP Page</title>
     </head>
     <body class="bg-info d-flex justify-content-center align-items-center vh-100">
-
+       
+        <form action="Controlador?accion=ingresarLogin" method="POST">
         <div class="bg-white p-5 rounded-5 text-secondary" style="width: 25rem">
             <div class="d-flex justify-content-center">
                 <img src="imagenes/login.png"
@@ -35,7 +36,7 @@
                          style="height: 1rem"
                          />
                 </div>
-                <input class="form-control bg-light" type="text" placeholder="Username"/>
+                <input class="form-control bg-light" name="txt_username" type="text" placeholder="Username"/>
             </div>
             <div class="input-group">
                 <div class="input-group-text bg-info">
@@ -44,7 +45,7 @@
                          style="height: 1rem"
                          />
                 </div>
-                <input class="form-control mt-2 bg-light" type="password" placeholder="Password"/>
+                <input class="form-control mt-2 bg-light" name="txt_password" type="password" placeholder="Password"/>
             </div>
             <div class="d-flex justify-content-around" mt-4>
                 <div class="d-flex align-items-center gap-1">
@@ -56,7 +57,9 @@
                        style="font-size: 0.9rem" href="#">Olvidate tu contraseña</a> 
                 </div>
             </div>
-            <div class="btn btn-info text-white w-100 mt-2 fw-semibold shadow-sm">Login</div>
+            <div >
+                <input class="btn btn-info text-white w-100 mt-2 fw-semibold shadow-sm" type="submit" name="accion" value="Ingresar">
+            </div>
             <div class="d-flex gap-1 justify-content-center mt-1">
                 <div>¿No tienes cuenta?</div>
                 <a class="text-decoration-none text-info fw-semibold" href="registro.jsp">Registrese</a>
@@ -77,6 +80,7 @@
         </div>
 
     </div>
+    </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
