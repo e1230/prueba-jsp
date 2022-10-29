@@ -1,6 +1,7 @@
 pruebas\main.class
+config\ConexionR.class
+modelo\DTO\PersonaDTO.class
 config\Conexion.class
 modelo\DAO\PersonaDAO.class
 controlador\Controlador.class
 config\ConexionPrueba.class
-modelo\DTO\PersonaDTO.class

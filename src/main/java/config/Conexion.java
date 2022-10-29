@@ -30,13 +30,12 @@ public class Conexion {
     private static Connection conexion = null;
     //Singleton//
     private static Conexion instancia;
-
     private String BD = "jdbc:postgresql://localhost:5432/prueba";
     private String usuario = "postgres";
     private String contra = "admin";
     private String host = "ec2-54-82-205-3.compute-1.amazonaws.com"; //Heroku
 
-    public Connection conectar() {
+    public Connection conectar() throws SQLException {
         try {
             conexion = (Connection) DriverManager.getConnection(BD, usuario, contra);
             System.out.println("Conexion exitosa Empezamos con la base de datos");

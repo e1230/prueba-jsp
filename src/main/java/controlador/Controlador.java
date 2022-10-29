@@ -8,6 +8,9 @@ import com.sun.java.swing.plaf.windows.resources.windows;
 import static java.awt.SystemColor.window;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,11 +28,11 @@ public class Controlador extends HttpServlet {
     PersonaDAO objpersoDAO = new PersonaDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
 
         String accion = request.getParameter("accion");
 
-        if (accion.equalsIgnoreCase("ingresarLogin")) {
+        if (accion.equals("ingresarLogin")) {
 
             String username = request.getParameter("txt_username");
             String password = request.getParameter("txt_password");
@@ -53,13 +56,21 @@ public class Controlador extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

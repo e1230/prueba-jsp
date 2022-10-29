@@ -5,6 +5,8 @@
 package modelo.DAO;
 
 import config.Conexion;
+import config.ConexionR;
+import config.ConexionRHeroku;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,18 +22,28 @@ import java.sql.*;
 public class PersonaDAO {
 
     //Conexion a la base de datos con Singleton//
-    private static final Conexion con = Conexion.getInstance();
-    
+   // Conexion con = Conexion.getInstance();
+   //ConexionR conR = ConexionR.getIntance();
+    ConexionRHeroku conrHeroku = new ConexionRHeroku();
+    Connection conexion = null;
+
+    //Sentencias SQL//
     private PreparedStatement ps;
     private ResultSet rs;
     private int r;
     private String sql;
-    
-    public PersonaDTO validar(String correo, String clave) {
+
+    public PersonaDAO(){
+       
+    }
+
+    public PersonaDTO validar(String correo, String clave) throws SQLException {
         PersonaDTO objpersona = new PersonaDTO();
         sql = "SELECT * FROM persona WHERE correo=? AND clave=?";
         try {
-            Connection conexion = con.conectar();
+           // conexion = con.conectar();
+          //  conexion = conR.conectar();
+          conexion = conrHeroku.conectar();
             ps = conexion.prepareStatement(sql);
             ps.setString(1, correo);
             ps.setString(2, clave);
@@ -42,13 +54,16 @@ public class PersonaDAO {
                 objpersona.setCorreo(rs.getString("correo"));
                 objpersona.setTelefono(rs.getString("telefono"));
                 objpersona.setClave(rs.getString("clave"));
+               
             }
-            
+
         } catch (Exception e) {
-            System.out.println("Error a validar usuario: "+e);
+            System.out.println("Error a validar usuario: " + e);
+
         }
-        
+
         return objpersona;
+
     }
 //    public List<PersonaDTO> readAll(){
 //        List<PersonaDTO> lista = null;
