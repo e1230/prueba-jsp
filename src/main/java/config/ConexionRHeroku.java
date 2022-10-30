@@ -20,13 +20,6 @@ public class ConexionRHeroku {
     private String contra;
     private static ConexionRHeroku con;
 
-    public ConexionRHeroku() {
-        this.conectar = null;
-        this.BD = "bd_bonill";
-        this.usuario = "postgres";
-        this.contra = "123456";
-    }
-
     public Connection conectar() {
         try {
             Class.forName("org.postgresql.Driver");

@@ -1,5 +1,6 @@
 pruebas\main.class
 config\ConexionR.class
+config\ConexionRHeroku.class
 modelo\DTO\PersonaDTO.class
 config\Conexion.class
 modelo\DAO\PersonaDAO.class
