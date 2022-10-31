@@ -8,6 +8,9 @@ package controlador;
 import static java.awt.SystemColor.window;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +28,7 @@ public class Controlador extends HttpServlet {
     PersonaDAO objpersoDAO = new PersonaDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
 
         String accion = request.getParameter("accion");
 
@@ -34,18 +37,30 @@ public class Controlador extends HttpServlet {
             String username = request.getParameter("txt_username");
             String password = request.getParameter("txt_password");
             //Metodo para validar usuario//
-            objpersoDTO = objpersoDAO.validar(username, password);           
-                if (objpersoDTO.getCorreo() != null) {
-                    request.getRequestDispatcher("principal.jsp").forward(request, response);
-                    System.out.println("Deberia Funcionar DB");
-                }
-                else{
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                    System.out.println("información no esta en BD");
-                }
+            objpersoDTO = objpersoDAO.validar(username, password);
+            if (objpersoDTO.getCorreo() != null) {
+                request.getRequestDispatcher("principal.jsp").forward(request, response);
+                System.out.println("Deberia Funcionar DB");
+            } else {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                System.out.println("información no esta en BD");
+            }
         }
-        else{
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+//        else{
+//            request.getRequestDispatcher("index.jsp").forward(request, response);
+//        }
+
+        if (accion.equalsIgnoreCase("Registrar")) {
+            System.out.println("si esta sirviendo boton");
+            String nombre = request.getParameter("txt_nombre");
+            String correo = request.getParameter("txt_correo");
+            String telefono = request.getParameter("txt_telefono");
+            String clave = request.getParameter("txt_clave");
+            objpersoDTO = new PersonaDTO(nombre, correo, telefono, clave);
+            objpersoDAO.AddPersona(objpersoDTO);
+            
+            request.getRequestDispatcher("principal.jsp").forward(request, response);
+
         }
 
     }
@@ -53,13 +68,21 @@ public class Controlador extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

@@ -5,6 +5,8 @@
 package modelo.DAO;
 
 import config.Conexion;
+import config.ConexionR;
+import config.ConexionRHeroku;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -21,18 +23,37 @@ import java.sql.*;
 public class PersonaDAO {
 
     //Conexion a la base de datos con Singleton//
+<<<<<<< HEAD
     private static final Conexion con = Conexion.getInstance();
     Connection conexion; 
+=======
+    // Conexion con = Conexion.getInstance();
+    ConexionR conR = ConexionR.getIntance();
+    //ConexionRHeroku conrHeroku = new ConexionRHeroku();
+    Connection conexion = null;
+
+    //Sentencias SQL//
+>>>>>>> postgresql-local
     private PreparedStatement ps;
     private ResultSet rs;
     private int r;
     private String sql;
-    
-    public PersonaDTO validar(String correo, String clave) {
+
+    public PersonaDAO() {
+
+    }
+
+    public PersonaDTO validar(String correo, String clave) throws SQLException {
         PersonaDTO objpersona = new PersonaDTO();
         sql = "SELECT * FROM persona WHERE correo=? AND clave=?";
         try {
+<<<<<<< HEAD
             conexion = con.conectar();
+=======
+            // conexion = con.conectar();
+            //  conexion = conR.conectar();
+            conexion = conR.conectar();
+>>>>>>> postgresql-local
             ps = conexion.prepareStatement(sql);
             ps.setString(1, correo);
             ps.setString(2, clave);
@@ -43,13 +64,31 @@ public class PersonaDAO {
                 objpersona.setCorreo(rs.getString("correo"));
                 objpersona.setTelefono(rs.getString("telefono"));
                 objpersona.setClave(rs.getString("clave"));
+
             }
-            
         } catch (Exception e) {
-            System.out.println("Error a validar usuario: "+e);
+            System.out.println("Error a validar usuario: " + e);
+
         }
-        
         return objpersona;
+    }
+
+    public int AddPersona(PersonaDTO personadto) {
+        sql = "INSERT INTO persona(nombre, correo, telefono, clave) VALUES (?, ?, ?, ?);";
+        try{
+            System.out.println("Agregado correctamente");
+            conexion = conR.conectar();
+            ps = conexion.prepareStatement(sql);
+            ps.setString(1, personadto.getNombre());
+            ps.setString(2, personadto.getCorreo());
+            ps.setString(3, personadto.getTelefono());
+            ps.setString(4, personadto.getClave());
+            ps.executeUpdate();
+            System.out.println("Persona Añadida a la BD");
+        }catch(Exception e){
+            System.out.println("Excepcion es: "+e.getMessage());
+        }
+        return r;
     }
 //    public List<PersonaDTO> readAll(){
 //        List<PersonaDTO> lista = null;

@@ -22,8 +22,7 @@ public class PersonaDTO implements Serializable {
     public PersonaDTO() {
     }
 
-    public PersonaDTO(int id, String nombre, String correo, String telefono, String clave) {
-        this.id = id;
+    public PersonaDTO(String nombre, String correo, String telefono, String clave) {
         this.nombre = nombre;
         this.correo = correo;
         this.telefono = telefono;
