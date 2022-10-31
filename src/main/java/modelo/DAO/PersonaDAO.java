@@ -24,7 +24,7 @@ public class PersonaDAO {
 
     //Conexion a la base de datos con Singleton//
     // Conexion con = Conexion.getInstance();
-    ConexionR conR = ConexionR.getIntance();
+    ConexionRHeroku conR = ConexionRHeroku.getIntance();
     //ConexionRHeroku conrHeroku = new ConexionRHeroku();
     Connection conexion = null;
 
