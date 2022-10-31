@@ -30,12 +30,7 @@ public class Conexion {
     private static Connection conexion = null;
     //Singleton//
     private static Conexion instancia;
-<<<<<<< HEAD
-
-    private String BD = "jdbc:postgresql://localhost:5432/Prueba";
-=======
     private String BD = "jdbc:postgresql://localhost:5432/prueba";
->>>>>>> postgresql-local
     private String usuario = "postgres";
     private String contra = "850518";
     private String host = "ec2-54-82-205-3.compute-1.amazonaws.com"; //Heroku

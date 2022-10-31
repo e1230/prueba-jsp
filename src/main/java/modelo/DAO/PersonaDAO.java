@@ -23,17 +23,12 @@ import java.sql.*;
 public class PersonaDAO {
 
     //Conexion a la base de datos con Singleton//
-<<<<<<< HEAD
-    private static final Conexion con = Conexion.getInstance();
-    Connection conexion; 
-=======
     // Conexion con = Conexion.getInstance();
     ConexionR conR = ConexionR.getIntance();
     //ConexionRHeroku conrHeroku = new ConexionRHeroku();
     Connection conexion = null;
 
     //Sentencias SQL//
->>>>>>> postgresql-local
     private PreparedStatement ps;
     private ResultSet rs;
     private int r;
@@ -47,13 +42,9 @@ public class PersonaDAO {
         PersonaDTO objpersona = new PersonaDTO();
         sql = "SELECT * FROM persona WHERE correo=? AND clave=?";
         try {
-<<<<<<< HEAD
-            conexion = con.conectar();
-=======
             // conexion = con.conectar();
             //  conexion = conR.conectar();
             conexion = conR.conectar();
->>>>>>> postgresql-local
             ps = conexion.prepareStatement(sql);
             ps.setString(1, correo);
             ps.setString(2, clave);
