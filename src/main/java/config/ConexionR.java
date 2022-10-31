@@ -31,9 +31,9 @@ public class ConexionR {
     public Connection conectar() {
         try {
             Class.forName("org.postgresql.Driver");
-            this.BD = "jdbc:postgresql://localhost:5432/prueba";
+            this.BD = "jdbc:postgresql://localhost:5432/Prueba";
             this.usuario = "postgres";
-            this.contra = "admin";
+            this.contra = "850518";
             this.conectar = (Connection) DriverManager.getConnection(BD, usuario, contra);
             System.out.println("SE CONECTO");
         } catch (ClassNotFoundException | HeadlessException | SQLException e) {
