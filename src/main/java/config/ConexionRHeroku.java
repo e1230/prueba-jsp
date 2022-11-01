@@ -23,9 +23,9 @@ public class ConexionRHeroku {
     public Connection conectar() {
         try {
             Class.forName("org.postgresql.Driver");
-            this.BD = "jdbc:postgresql://ec2-44-209-57-4.compute-1.amazonaws.com:5432/d9b8sg4m79k2mk";
-            this.usuario = "nqkzpvjjarudjz";
-            this.contra = "4ad23efa96673c24005d5e5ecf254c0309310927a1b9e1bd12ef2eeeb2127734";
+            this.BD = "jdbc:postgresql://ec2-3-213-66-35.compute-1.amazonaws.com:5432/dcchpru3au94ba";
+            this.usuario = "zkevnonepjutyx";
+            this.contra = "0422481c595b7e4923500d8dc2947ad96da42dfffa0d6e4b006ad532ebccde10";
             this.conectar = (Connection) DriverManager.getConnection(BD, usuario, contra);
             System.out.println("SE CONECTO");
         } catch (ClassNotFoundException | HeadlessException | SQLException e) {
